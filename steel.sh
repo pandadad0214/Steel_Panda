@@ -3,8 +3,8 @@
 # Steel Panda - Task Executor
 # Executes all scripts inside the tasks/ directory
 
-LOG_FILE="steel.log"
-TASK_DIR="tasks"
+LOG_FILE="${LOG_FILE:-steel.log}"
+TASK_DIR="${TASK_DIR:-Tasks}"   # folder of *.sh tasks (override with TASK_DIR=...)
 
 echo "[Steel Panda] Starting task executor..." | tee -a "$LOG_FILE"
 
