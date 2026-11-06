@@ -1,0 +1,4 @@
+# Created when you run steel.sh from a checkout (defaults sit next to the script).
+steel.log
+steel-heartbeat.log
+steel-heartbeat.log.1
