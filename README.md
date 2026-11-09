@@ -14,14 +14,36 @@
 
 # Steel Panda
 
-**A local-first task runner.** Put shell scripts in a folder, run `bash steel.sh`, and read the log. Each task's exit code is recorded. If any task fails, the process exits non-zero.
-
-Linux, macOS, and Termux. Bash 3.2 or newer. The runner opens no network connections.
+Steel Panda runs every shell script in a folder, logs each exit code and exits non-zero if any task failed, all on your own machine. It is a single Bash file for Linux, macOS and Termux (Bash 3.2+) that opens no network connections.
 
 [![Latest Release](https://img.shields.io/github/v/release/pandadad0214/Steel_Panda?label=latest%20release)](https://github.com/pandadad0214/Steel_Panda/releases/latest)
 [![CI](https://github.com/pandadad0214/Steel_Panda/actions/workflows/ci.yml/badge.svg)](https://github.com/pandadad0214/Steel_Panda/actions/workflows/ci.yml)
 
-## Install / Use
+## How to use this
+
+```bash
+curl -fsSL https://github.com/pandadad0214/Steel_Panda/releases/latest/download/install.sh | bash
+cd ~/steel-panda && bash steel.sh
+```
+
+1. **Install** the latest Release with the command above (into `~/steel-panda`; set `STEEL_PANDA_HOME` or `INSTALL_DIR` to change it).
+2. **Add tasks:** save `*.sh` files in `Tasks/` (or point `TASK_DIR` at your own folder). Prefix names with `01-`, `02-` when order matters.
+3. **Run** `bash steel.sh` and read `steel.log`. Exit 0 means every task passed; 1 means a task failed; 2 means Steel could not start.
+
+## For AI agents
+
+| Field | Value |
+| --- | --- |
+| Purpose | Run every `*.sh` in a task folder in lexical order, log each exit code, return an aggregate exit code. |
+| Use when | You need a dependency-free, local runner for a folder of maintenance or recovery scripts, e.g. as Watchdog Panda's failure hook. |
+| Do not use when | You need scheduling, timeouts, parallel runs, remote execution or a DAG (Steel has none of these). |
+| Install | `curl -fsSL https://github.com/pandadad0214/Steel_Panda/releases/latest/download/install.sh \| bash` |
+| Entry point | `bash steel.sh [--stop-on-error]`; env `TASK_DIR`, `LOG_FILE`, `STEEL_STOP_ON_ERROR` |
+| Outputs | `steel.log` lines `Finished: <path> (exit N)` plus a `ran/failed` summary; stdout mirrors progress |
+| Exit codes | 0 all passed, 1 a task failed, 2 could not start |
+| Side effects | Runs your scripts with `bash`; the runner itself opens no network and does not prompt. |
+
+## Install options
 
 ### One-command install (latest tagged Release)
 
@@ -29,7 +51,7 @@ Linux, macOS, and Termux. Bash 3.2 or newer. The runner opens no network connect
 curl -fsSL https://github.com/pandadad0214/Steel_Panda/releases/latest/download/install.sh | bash
 ```
 
-That installs the newest [GitHub Release](https://github.com/pandadad0214/Steel_Panda/releases/latest) into `~/steel-panda` (`STEEL_PANDA_HOME` or `INSTALL_DIR` to choose another directory). A release is published when a `vX.Y.Z` tag is pushed. The changelog in this tree is **0.3.0**; `curl | bash` stays on the previous release until a `v0.3.0` tag exists.
+That installs the newest [GitHub Release](https://github.com/pandadad0214/Steel_Panda/releases/latest) into `~/steel-panda` (`STEEL_PANDA_HOME` or `INSTALL_DIR` to choose another directory). A release is published when a `vX.Y.Z` tag is pushed; the latest is v0.3.0.
 
 Prefer a manual download? Take `steel-panda.tar.gz` from the latest Release and check it against `SHA256SUMS.txt`.
 
@@ -41,7 +63,7 @@ cd ~/steel-panda && bash steel.sh
 
 ### Run this repository
 
-This matches the changelog and the script in the checkout, including before the next tag:
+To run the current main branch instead of the latest Release:
 
 ```bash
 git clone https://github.com/pandadad0214/Steel_Panda.git
