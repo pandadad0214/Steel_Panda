@@ -19,6 +19,12 @@ Steel Panda runs every shell script in a folder, logs each exit code and exits n
 [![Latest Release](https://img.shields.io/github/v/release/pandadad0214/Steel_Panda?label=latest%20release)](https://github.com/pandadad0214/Steel_Panda/releases/latest)
 [![CI](https://github.com/pandadad0214/Steel_Panda/actions/workflows/ci.yml/badge.svg)](https://github.com/pandadad0214/Steel_Panda/actions/workflows/ci.yml)
 
+## Part of [Panda Federation](https://pandafederation.github.io/)
+
+[![Part of Panda Federation](https://pandafederation.github.io/assets/badge.svg)](https://pandafederation.github.io/)
+
+This project is a module of the Panda Federation — public-data tools, MCP servers, and local-first apps in one catalog. See the rest of the work, including books when they publish and the matching free or paid editions of this tool, at the [official site](https://pandafederation.github.io/).
+
 ## How to use this
 
 ```bash
